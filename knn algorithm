@@ -65,3 +65,21 @@ for n_neighbors in neighbors_settings :
     
 print(training_accuracy)
 
+
+** scaling **
+from sklearn.preprocessing import MinMaxScaler
+scaler = MinMaxScaler()
+scaler.fit(trainx)
+x_train_scaled = scaler.transform(trainx)
+
+from sklearn.neighbors import KNeighborsClassifier
+training_accuracy = []
+
+neighbors_settings = range(1,11)
+for n_neighbors in neighbors_settings :
+    model = KNeighborsClassifier(n_neighbors=n_neighbors)
+    model.fit(trainx,y)
+    training_accuracy.append(model.score(trainx,y))
+ print(training_accuracy)
+
+
