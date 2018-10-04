@@ -48,3 +48,20 @@ test2
 ##########
 
 print("예측 : {}".format(model.predict(test2)))
+
+
+
+
+**for문을 이용한 n_neighbors**
+from sklearn.neighbors import KNeighborsClassifier
+training_accuracy = []
+
+
+neighbors_settings = range(1,11)
+for n_neighbors in neighbors_settings :
+    model = KNeighborsClassifier(n_neighbors=n_neighbors)
+    model.fit(trainx,y)
+    training_accuracy.append(model.score(trainx,y))
+    
+print(training_accuracy)
+
