@@ -1,0 +1,50 @@
+from IPython.display import display
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+
+##########
+
+train=pd.read_csv("C:/py/train.csv")
+
+##########
+
+train.isnull().sum().to_frame()
+
+##########
+
+train1 = train[-train['Age'].isnull()]
+trainx = train1.iloc[:,[5,9]]
+len(trainx)
+
+##########
+
+y = train1['Survived']
+len(y)
+
+##########
+
+from sklearn.neighbors import KNeighborsClassifier
+model = KNeighborsClassifier(n_neighbors=3)
+model.fit(trainx,y)
+
+##########
+
+print("예측 : {} ".format(model.predict(trainx)))
+
+##########
+
+print("정확도 : {}".format(model.score(trainx,y)))
+
+##########
+
+test= pd.read_csv("C:/py/test.csv")
+
+test1= test[-(test['Age'].isnull()) & -(test['Fare'].isnull())]
+test1.isnull().sum().to_frame()
+test2 = test1.iloc[:,[4,8]]
+test2
+
+##########
+
+print("예측 : {}".format(model.predict(test2)))
